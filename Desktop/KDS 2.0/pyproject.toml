@@ -1,0 +1,9 @@
+[tool.vercel]
+# Vercel Python entrypoint: module:path_to_app
+# The repository contains the application under the `C-Care-main` folder.
+# Expose the Flask WSGI `app` object from `backend/api/index.py`.
+entrypoint = "C-Care-main.backend.api.index:app"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
