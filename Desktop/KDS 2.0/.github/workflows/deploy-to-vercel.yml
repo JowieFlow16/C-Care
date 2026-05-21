@@ -1,0 +1,26 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [ feature/github-storage ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install vercel CLI
+        run: npm ci --silent || true
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          # Deploy from the C-Care-main folder so Vercel picks up its vercel.json
+          npx vercel --prod --token "$VERCEL_TOKEN" --confirm --name c-care-ug --cwd C-Care-main
